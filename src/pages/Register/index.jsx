@@ -63,7 +63,7 @@ export default function Register() {
           Loading...
         </button>
       ) : (
-        <button className='btn'>Login</button>
+        <button className='btn'>Register</button>
       )}
     </form>
   );
