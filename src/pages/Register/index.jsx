@@ -27,7 +27,7 @@ export default function Register() {
       <h2>Register</h2>
       <hr />
       {error && <p>{error}</p>}
-      {/* Email */}
+      {/* email */}
       <label>
         <span>Email:</span>
         <input
@@ -37,7 +37,7 @@ export default function Register() {
           value={formData.email}
         />
       </label>
-      {/* Display Name */}
+      {/* displayName */}
       <label>
         <span>Display Name:</span>
         <input
@@ -47,7 +47,7 @@ export default function Register() {
           value={formData.displayName}
         />
       </label>
-      {/* Password */}
+      {/* password */}
       <label>
         <span>Password:</span>
         <input
@@ -57,7 +57,7 @@ export default function Register() {
           value={formData.password}
         />
       </label>
-      {/* Submit Button */}
+      {/* submit button */}
       {isPending ? (
         <button className='btn' disabled>
           Loading...

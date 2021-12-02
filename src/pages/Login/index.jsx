@@ -23,7 +23,7 @@ export default function Login() {
     <form className={styles["login-form"]} onSubmit={onSubmitHandler}>
       <h2>Login</h2>
       <hr />
-      {/* Email */}
+      {/* email */}
       <label>
         <span>Email:</span>
         <input
@@ -33,7 +33,7 @@ export default function Login() {
           value={formData.email}
         />
       </label>
-      {/* Password */}
+      {/* password */}
       <label>
         <span>Password:</span>
         <input

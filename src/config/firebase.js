@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-// Firebase Config
+// firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAH0cN2Qqe0pdN3uN2iwJAQEPRxrCjSpzQ",
   authDomain: "myfinance-cff2a.firebaseapp.com",
@@ -12,10 +12,10 @@ const firebaseConfig = {
   appId: "1:516438316183:web:6fb6fa6ce4a9842763c5d2",
 };
 
-// Initialize Firebase
+// initialize firebase
 firebase.initializeApp(firebaseConfig);
 
-// Initialize Firebase Services
+// initialize firebase services
 const fbFirestore = firebase.firestore();
 const fbAuth = firebase.auth();
 
