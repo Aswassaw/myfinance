@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
+import useRegister from "../../hooks/useRegister";
 
 export default function Register() {
+  const { register, error, isPending } = useRegister();
   const [formData, setFormData] = useState({
     email: "",
     displayName: "",
@@ -17,13 +19,14 @@ export default function Register() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(formData);
+    register(formData);
   };
 
   return (
     <form className={styles["register-form"]} onSubmit={onSubmitHandler}>
       <h2>Register</h2>
       <hr />
+      {error && <p>{error}</p>}
       {/* Email */}
       <label>
         <span>Email:</span>
@@ -54,7 +57,14 @@ export default function Register() {
           value={formData.password}
         />
       </label>
-      <button className='btn'>Login</button>
+      {/* Submit Button */}
+      {isPending ? (
+        <button className='btn' disabled>
+          Loading...
+        </button>
+      ) : (
+        <button className='btn'>Login</button>
+      )}
     </form>
   );
 }

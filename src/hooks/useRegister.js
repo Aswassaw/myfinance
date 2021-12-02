@@ -19,9 +19,7 @@ export default function useRegister() {
       }
 
       // Add displayName to User
-      await res.user.updateProfile({
-        displayName,
-      });
+      await res.user.updateProfile({ displayName });
       setError(null);
       setIsPending(false);
     } catch (err) {
@@ -31,5 +29,5 @@ export default function useRegister() {
     }
   };
 
-  return { error, isPending, register };
+  return { register, error, isPending };
 }
