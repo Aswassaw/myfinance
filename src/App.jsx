@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useAuthContext } from "./hooks/auth/useAuthContext";
+import useAuthContext from "./hooks/auth/useAuthContext";
 import Auth from "./middlewares/Auth";
 
 // pages & components

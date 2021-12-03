@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../../hooks/auth/useAuthContext";
+import useAuthContext from "../../hooks/auth/useAuthContext";
 import useLogout from "../../hooks/auth/useLogout";
 import styles from "./Navbar.module.css";
 

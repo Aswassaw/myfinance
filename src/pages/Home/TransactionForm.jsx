@@ -37,7 +37,7 @@ export default function TransactionForm() {
         <label>
           <span>Amount (Rp):</span>
           <input
-            type='text'
+            type='number'
             name='amount'
             onChange={onChangeHandler}
             value={formData.amount}

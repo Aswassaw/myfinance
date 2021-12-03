@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fbAuth } from "../../config/firebase";
-import { useAuthContext } from "./useAuthContext";
+import useAuthContext from "./useAuthContext";
 
 export default function useRegister() {
   const [isCancelled, setIsCancelled] = useState(false);
