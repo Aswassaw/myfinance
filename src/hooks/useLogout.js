@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fbAuth } from "../config/firebase";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function useLogout() {
+  const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { authDispatch } = useAuthContext();
@@ -18,14 +19,26 @@ export default function useLogout() {
       // dispatch logout action
       authDispatch({ type: "LOGOUT" });
 
-      setError(null);
-      setIsPending(false);
+      // update state
+      if (!isCancelled) {
+        setError(null);
+        setIsPending(false);
+      }
     } catch (err) {
       console.log(err.message);
-      setError(err.message);
-      setIsPending(false);
+      if (!isCancelled) {
+        setError(err.message);
+        setIsPending(false);
+      }
     }
   };
+
+  useEffect(() => {
+    // clean up
+    return () => {
+      setIsCancelled(true);
+    };
+  }, []);
 
   return { logout, error, isPending };
 }

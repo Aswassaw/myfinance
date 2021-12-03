@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fbAuth } from "../config/firebase";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function useRegister() {
+  const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { authDispatch } = useAuthContext();
@@ -25,14 +26,25 @@ export default function useRegister() {
       // dispatch login action
       authDispatch({ type: "LOGIN", payload: res.user });
 
-      setError(null);
-      setIsPending(false);
+      if (!isCancelled) {
+        setError(null);
+        setIsPending(false);
+      }
     } catch (err) {
       console.log(err.message);
-      setError(err.message);
-      setIsPending(false);
+      if (!isCancelled) {
+        setError(err.message);
+        setIsPending(false);
+      }
     }
   };
+
+  useEffect(() => {
+    // clean up
+    return () => {
+      setIsCancelled(true);
+    };
+  }, []);
 
   return { register, error, isPending };
 }
