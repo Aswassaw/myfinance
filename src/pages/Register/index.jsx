@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
-import useRegister from "../../hooks/useRegister";
+import useRegister from "../../hooks/auth/useRegister";
 
 export default function Register() {
   const { register, error, isPending } = useRegister();

@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
+import useLogout from "../../hooks/auth/useLogout";
 import styles from "./Navbar.module.css";
-import useLogout from "../../hooks/useLogout";
-import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar() {
-  const { authState } = useContext(AuthContext);
+  const { authState } = useAuthContext();
   const { logout } = useLogout();
 
   return (

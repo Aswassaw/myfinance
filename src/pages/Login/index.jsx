@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import useLogin from "../../hooks/auth/useLogin";
 import styles from "./Login.module.css";
-import useLogin from "../../hooks/useLogin";
 
 export default function Login() {
   const { login, error, isPending } = useLogin();

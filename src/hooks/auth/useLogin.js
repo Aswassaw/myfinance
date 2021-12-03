@@ -1,25 +1,28 @@
 import { useEffect, useState } from "react";
-import { fbAuth } from "../config/firebase";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { fbAuth } from "../../config/firebase";
+import { useAuthContext } from "./useAuthContext";
 
-export default function useLogout() {
+export default function useLogin() {
   const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { authDispatch } = useAuthContext();
 
-  const logout = async () => {
+  const login = async ({ email, password }) => {
     setError(null);
     setIsPending(true);
 
     try {
-      // sign the user out
-      await fbAuth.signOut();
+      // login user
+      const res = await fbAuth.signInWithEmailAndPassword(email, password);
 
-      // dispatch logout action
-      authDispatch({ type: "LOGOUT" });
+      if (!res) {
+        throw new Error("Could not complete login.");
+      }
 
-      // update state
+      // dispatch login action
+      authDispatch({ type: "LOGIN", payload: res.user });
+
       if (!isCancelled) {
         setError(null);
         setIsPending(false);
@@ -40,5 +43,5 @@ export default function useLogout() {
     };
   }, []);
 
-  return { logout, error, isPending };
+  return { login, error, isPending };
 }

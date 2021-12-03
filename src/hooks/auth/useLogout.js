@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
-import { fbAuth } from "../config/firebase";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { fbAuth } from "../../config/firebase";
+import { useAuthContext } from "./useAuthContext";
 
-export default function useRegister() {
+export default function useLogout() {
   const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { authDispatch } = useAuthContext();
 
-  const register = async ({ email, displayName, password }) => {
+  const logout = async () => {
     setError(null);
     setIsPending(true);
 
     try {
-      // register user
-      const res = await fbAuth.createUserWithEmailAndPassword(email, password);
+      // sign the user out
+      await fbAuth.signOut();
 
-      if (!res) {
-        throw new Error("Could not complete register.");
-      }
+      // dispatch logout action
+      authDispatch({ type: "LOGOUT" });
 
-      // add displayName to user
-      await res.user.updateProfile({ displayName });
-
-      // dispatch login action
-      authDispatch({ type: "LOGIN", payload: res.user });
-
+      // update state
       if (!isCancelled) {
         setError(null);
         setIsPending(false);
@@ -46,5 +40,5 @@ export default function useRegister() {
     };
   }, []);
 
-  return { register, error, isPending };
+  return { logout, error, isPending };
 }
