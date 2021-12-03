@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
+import useLogin from "../../hooks/useLogin";
 
 export default function Login() {
+  const { login, error, isPending } = useLogin();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -16,13 +18,14 @@ export default function Login() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(formData);
+    login(formData);
   };
 
   return (
     <form className={styles["login-form"]} onSubmit={onSubmitHandler}>
       <h2>Login</h2>
       <hr />
+      {error && <p>{error}</p>}
       {/* email */}
       <label>
         <span>Email:</span>
@@ -31,6 +34,7 @@ export default function Login() {
           name='email'
           onChange={onChangeHandler}
           value={formData.email}
+          required
         />
       </label>
       {/* password */}
@@ -41,9 +45,16 @@ export default function Login() {
           name='password'
           onChange={onChangeHandler}
           value={formData.password}
+          required
         />
       </label>
-      <button className='btn'>Login</button>
+      {isPending ? (
+        <button className='btn' disabled>
+          Loading...
+        </button>
+      ) : (
+        <button className='btn'>Login</button>
+      )}
     </form>
   );
 }

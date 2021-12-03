@@ -35,6 +35,7 @@ export default function Register() {
           name='email'
           onChange={onChangeHandler}
           value={formData.email}
+          required
         />
       </label>
       {/* displayName */}
@@ -45,6 +46,7 @@ export default function Register() {
           name='displayName'
           onChange={onChangeHandler}
           value={formData.displayName}
+          required
         />
       </label>
       {/* password */}
@@ -55,6 +57,7 @@ export default function Register() {
           name='password'
           onChange={onChangeHandler}
           value={formData.password}
+          required
         />
       </label>
       {/* submit button */}
