@@ -5,7 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 export default function useLogout() {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
-  const { dispatch } = useAuthContext();
+  const { authDispatch } = useAuthContext();
 
   const logout = async () => {
     setError(null);
@@ -16,7 +16,7 @@ export default function useLogout() {
       await fbAuth.signOut();
 
       // dispatch logout action
-      dispatch({ type: "LOGOUT" });
+      authDispatch({ type: "LOGOUT" });
 
       setError(null);
       setIsPending(false);
