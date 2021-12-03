@@ -14,7 +14,11 @@ export default function App() {
   return (
     <div className='App'>
       {/* jika proses authentikasi belum selesai */}
-      {!authState.authIsReady && <h1>Loading...</h1>}
+      {!authState.authIsReady && (
+        <div className='loading-auth'>
+          <h1>Loading...</h1>
+        </div>
+      )}
 
       {/* jika proses authentication telah selesai */}
       {authState.authIsReady && (

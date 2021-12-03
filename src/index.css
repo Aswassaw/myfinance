@@ -37,3 +37,10 @@ ul {
   background: #1f9751;
   color: #fff;
 }
+.loading-auth {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
