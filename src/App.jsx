@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useAuthContext } from "./hooks/auth/useAuthContext";
+
 // pages & components
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -7,16 +9,24 @@ import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 
 export default function App() {
+  const { authState } = useAuthContext();
+
   return (
     <div className='App'>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-        </Routes>
-      </BrowserRouter>
+      {/* jika proses authentikasi belum selesai */}
+      {!authState.authIsReady && <h1>Loading...</h1>}
+
+      {/* jika proses authentication telah selesai */}
+      {authState.authIsReady && (
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      )}
     </div>
   );
 }
