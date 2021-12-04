@@ -26,3 +26,9 @@
   color: #333;
   text-decoration: none;
 }
+
+@media (max-width: 450px) {
+  .display-name {
+    display: none;
+  }
+}

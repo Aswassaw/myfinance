@@ -21,7 +21,7 @@ export default function useCollection(collection) {
       },
       (err) => {
         console.log(err);
-        setError("Cound Not Fetch the Data.");
+        setError("Could Not Fetch the Data.");
       }
     );
 
