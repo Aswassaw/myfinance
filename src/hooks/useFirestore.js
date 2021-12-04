@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { fbFirestore } from "../config/firebase";
+import { fbFirestore, timestamp } from "../config/firebase";
 
 const initialState = {
   document: null,
@@ -55,8 +55,12 @@ export default function useFirestore(collection) {
     dispatch({ type: "IS_PENDING" });
 
     try {
+      // create timestamp object
+      const createdAt = timestamp.fromDate(new Date());
+
       // add doc to firebase
-      const addedDocument = await ref.add(doc);
+      const addedDocument = await ref.add({ ...doc, createdAt });
+
       // dispatch add document
       dispatchIfNotCancelled({ type: "ADD_DOCUMENT", payload: addedDocument });
     } catch (err) {
