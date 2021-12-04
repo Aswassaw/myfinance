@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useFirestore from "../../hooks/useFirestore";
 
-export default function TransactionForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    amount: "",
-  });
+export default function TransactionForm({ uid }) {
+  const { response, addDocument } = useFirestore("transactions");
+  const [formData, setFormData] = useState({ name: "", amount: "" });
+
+  useEffect(() => {
+    // reset formData when crud success
+    if (response.success) {
+      setFormData({ name: "", amount: "" });
+    }
+  }, [response.success]);
 
   const onChangeHandler = (e) => {
     setFormData((val) => ({
@@ -15,7 +21,7 @@ export default function TransactionForm() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(formData);
+    addDocument({ uid, ...formData });
   };
 
   return (
@@ -44,7 +50,11 @@ export default function TransactionForm() {
             required
           />
         </label>
-        <button>Add Transaction</button>
+        {!response.isPending ? (
+          <button>Add Transaction</button>
+        ) : (
+          <button disabled>Loading...</button>
+        )}
       </form>
     </>
   );

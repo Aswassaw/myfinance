@@ -14,8 +14,8 @@ const firestoreReducer = (state, action) => {
       return {
         isPending: true,
         document: null,
-        success: false,
         error: null,
+        success: false,
       };
     case "ADD_DOCUMENT":
       return {
@@ -37,7 +37,7 @@ const firestoreReducer = (state, action) => {
 };
 
 export default function useFirestore(collection) {
-  const [state, dispatch] = useReducer(firestoreReducer, initialState);
+  const [response, dispatch] = useReducer(firestoreReducer, initialState);
   const [isCancelled, setIsCancelled] = useState(false);
 
   // collection ref
@@ -85,5 +85,5 @@ export default function useFirestore(collection) {
     };
   }, []);
 
-  return { state, addDocument, deleteDocument, updateDocument };
+  return { response, addDocument, deleteDocument, updateDocument };
 }
