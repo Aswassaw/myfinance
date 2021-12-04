@@ -86,14 +86,17 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: #ddd;
+  background: #DF2E2E;
   color: #777;
   border: none;
-  padding: 12px 8px;
+  padding: 10px 6px;
+  border-radius: 2px;
   text-align: center;
   line-height: 0;
   font-size: 0.9em;
   cursor: pointer;
+  color: white;
+  font-weight: bold;
 }
 .transaction-list-title {
   color: #1f9751;

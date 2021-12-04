@@ -39,7 +39,7 @@ export default function TransactionList({ transactions }) {
                   <p className={styles.name}>{transaction.name}</p>
                   <p className={styles.amount}>Rp. {transaction.amount}</p>
                   <button onClick={() => deleteTransaction(transaction.id)}>
-                    X
+                    <span>x</span>
                   </button>
                 </li>
               ))}

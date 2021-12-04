@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAuthContext from "../../hooks/auth/useAuthContext";
 import useCollection from "../../hooks/useCollection";
 import TransactionForm from "./TransactionForm";
@@ -12,6 +12,10 @@ export default function Home() {
     ["uid", "==", authState.user.uid],
     ["createdAt", "desc"]
   );
+
+  useEffect(() => {
+    document.title = "myFinance - Home";
+  }, []);
 
   return (
     <div className={styles.container}>

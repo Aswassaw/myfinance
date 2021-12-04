@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useLogin from "../../hooks/auth/useLogin";
 import styles from "./Login.module.css";
 
@@ -8,6 +8,10 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    document.title = "myFinance - Login";
+  }, []);
 
   const onChangeHandler = (e) => {
     setFormData((val) => ({

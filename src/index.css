@@ -44,3 +44,8 @@ ul {
   justify-content: center;
   align-items: center;
 }
+
+.not-found {
+  margin: 50px;
+  text-align: center;
+}

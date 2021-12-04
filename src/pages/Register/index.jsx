@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import useRegister from "../../hooks/auth/useRegister";
 
@@ -9,6 +9,10 @@ export default function Register() {
     displayName: "",
     password: "",
   });
+
+  useEffect(() => {
+    document.title = "myFinance - Register";
+  }, []);
 
   const onChangeHandler = (e) => {
     setFormData((val) => ({

@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
+import NotFound from "./NotFound";
 
 export default function App() {
   const { authState } = useAuthContext();
@@ -60,6 +61,7 @@ export default function App() {
                 </Auth>
               }
             />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       )}
