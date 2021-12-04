@@ -18,10 +18,16 @@ const firestoreReducer = (state, action) => {
         success: false,
       };
     case "ADD_DOCUMENT":
-    case "DELETE_DOCUMENT":
       return {
         isPending: false,
         document: action.payload,
+        error: null,
+        success: true,
+      };
+    case "DELETE_DOCUMENT":
+      return {
+        isPending: false,
+        document: null,
         error: null,
         success: true,
       };
@@ -60,10 +66,10 @@ export default function useFirestore(collection) {
       const createdAt = timestamp.fromDate(new Date());
 
       // add doc to firebase
-      const addedDocument = await ref.add({ ...doc, createdAt });
+      await ref.add({ ...doc, createdAt });
 
       // dispatch add document
-      dispatchIfNotCancelled({ type: "ADD_DOCUMENT", payload: addedDocument });
+      dispatchIfNotCancelled({ type: "ADD_DOCUMENT" });
     } catch (err) {
       console.log(err.message);
       // dispatch error
