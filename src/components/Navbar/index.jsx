@@ -29,7 +29,10 @@ export default function Navbar() {
         {/* if user not logged in */}
         {authState.user && (
           <>
-            <li className={styles['display-name']}>Hello, {authState.user.displayName}</li>
+            <li className={styles["display-name"]}>
+              Hello,{" "}
+              {authState.user.displayName.trim().split(" ")[0].slice(0, 8)}
+            </li>
             <li>
               <button className='btn' onClick={logout}>
                 Logout

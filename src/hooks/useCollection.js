@@ -1,12 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fbFirestore } from "../config/firebase";
 
-export default function useCollection(collection) {
+export default function useCollection(collection, _query) {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
+  // if we don't use a ref --> infinite loop in useEffect
+  // _query is an array and is "different" on every function call
+  const query = useRef(_query).current;
+
   useEffect(() => {
-    const ref = fbFirestore.collection(collection);
+    let ref = fbFirestore.collection(collection);
+
+    // jika ada query
+    if (query) {
+      ref = ref.where(...query);
+    }
 
     const unsub = ref.onSnapshot(
       (snapshot) => {
@@ -29,7 +38,7 @@ export default function useCollection(collection) {
     return () => {
       unsub();
     };
-  }, [collection]);
+  }, [collection, query]);
 
   return { documents, error };
 }

@@ -9,14 +9,20 @@ export default function TransactionList({ transactions }) {
       {!transactions && <p>Loading...</p>}
       {/* jika transactions telah tersedia */}
       {transactions && (
-        <ul className={styles.transactions}>
-          {transactions.map((transaction) => (
-            <li key={transaction.id}>
-              <p className={styles.name}>{transaction.name}</p>
-              <p className={styles.amount}>Rp. {transaction.amount}</p>
-            </li>
-          ))}
-        </ul>
+        <>
+          {transactions.length > 0 ? (
+            <ul className={styles.transactions}>
+              {transactions.map((transaction) => (
+                <li key={transaction.id}>
+                  <p className={styles.name}>{transaction.name}</p>
+                  <p className={styles.amount}>Rp. {transaction.amount}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Transaction data not found. Let's create one.</p>
+          )}
+        </>
       )}
     </>
   );
