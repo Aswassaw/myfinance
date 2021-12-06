@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import useRegister from "../../hooks/auth/useRegister";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const { register, error, isPending } = useRegister();
@@ -65,13 +66,16 @@ export default function Register() {
         />
       </label>
       {/* submit button */}
-      {isPending ? (
-        <button className='btn' disabled>
-          Loading...
-        </button>
-      ) : (
-        <button className='btn'>Register</button>
-      )}
+      <div className={styles.other}>
+        {isPending ? (
+          <button className='btn' disabled>
+            Loading...
+          </button>
+        ) : (
+          <button className='btn'>Register</button>
+        )}
+        <Link to='/login'>Login?</Link>
+      </div>
     </form>
   );
 }

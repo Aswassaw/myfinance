@@ -17,7 +17,7 @@ export default function Navbar() {
         {/* if user logged in */}
         {!authState.user && (
           <>
-            <li>
+            <li className={styles.register}>
               <Link to='/register'>Register</Link>
             </li>
             <li>

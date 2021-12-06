@@ -1,7 +1,7 @@
 /* navbar styles */
 .navbar {
   width: 100%;
-  background-color: #effaf0;
+  background-color: #E4EFE7;
   padding: 20px 10px;
   box-sizing: border-box;
 }
@@ -29,6 +29,12 @@
 
 @media (max-width: 450px) {
   .display-name {
+    display: none;
+  }
+}
+
+@media (max-width: 350px) {
+  .register {
     display: none;
   }
 }
