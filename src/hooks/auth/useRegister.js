@@ -22,6 +22,7 @@ export default function useRegister() {
 
       // add displayName to user
       await res.user.updateProfile({ displayName });
+      await res.user.sendEmailVerification();
 
       // dispatch login action
       authDispatch({ type: "LOGIN", payload: res.user });

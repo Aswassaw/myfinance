@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import useFirestore from "../../hooks/useFirestore";
 
-export default function TransactionForm({ uid }) {
+export default function TransactionForm({ emailVerified, uid }) {
   const { response, addDocument } = useFirestore("transactions");
   const [formData, setFormData] = useState({ name: "", amount: "" });
 
@@ -21,7 +22,16 @@ export default function TransactionForm({ uid }) {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    addDocument({ uid, ...formData });
+
+    if (!emailVerified) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed!",
+        text: "Your account is not verified yet, please verify your account.",
+      });
+    } else {
+      addDocument({ uid, ...formData });
+    }
   };
 
   return (

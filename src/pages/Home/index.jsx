@@ -16,18 +16,25 @@ export default function Home() {
   useEffect(() => {
     document.title = "myFinance - Home";
   }, []);
+  
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {/* jika ada error */}
-        {error && <p>{error}</p>}
-        {/* jika tidak ada error */}
-        {!error && <TransactionList transactions={documents} />}
+    <>
+      {/* jika akun belum terverifikasi */}
+      {!authState.user.emailVerified && (
+        <div className={styles.verified}>Your account is not verified yet, please verify your account.</div>
+      )}
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {/* jika ada error */}
+          {error && <p>{error}</p>}
+          {/* jika tidak ada error */}
+          {!error && <TransactionList transactions={documents} />}
+        </div>
+        <div className={styles.sidebar}>
+          <TransactionForm emailVerified={authState.user.emailVerified} uid={authState.user.uid} />
+        </div>
       </div>
-      <div className={styles.sidebar}>
-        <TransactionForm uid={authState.user.uid} />
-      </div>
-    </div>
+    </>
   );
 }

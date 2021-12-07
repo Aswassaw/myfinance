@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/auth/useAuthContext";
 import useLogout from "../../hooks/auth/useLogout";
 import styles from "./Navbar.module.css";
+import Logo from "./logo.png";
 
 export default function Navbar() {
   const { authState } = useAuthContext();
@@ -12,6 +13,7 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <ul>
         <li className={styles.title}>
+          <img src={Logo} alt='myFinance Logo' />
           <Link to='/'>myFinance</Link>
         </li>
         {/* if user logged in */}
